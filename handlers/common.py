@@ -1,5 +1,5 @@
 import asyncio
-
+import io
 from aiogram import types
 from bot_settings import dp, bot
 from database import bad_words, hellos, gifs
@@ -38,7 +38,7 @@ async def delete_channel_messages(message: types.Message):
 # Приветствие для нового пользователя
 async def welcome(message: types.Message):
     gif_doc = await gifs.find_one({'name': 'mygif'})
-    gif_data = gif_doc['data']
+    gif_data = gif_doc['url']
     for member in message.new_chat_members:
         await bot.send_animation(chat_id=message.chat.id, animation=gif_data, caption=f'Добро пожаловать, {member.first_name}!')
 

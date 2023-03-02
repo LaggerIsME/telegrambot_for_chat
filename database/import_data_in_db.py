@@ -31,9 +31,7 @@ async def parse_data_to_anecdotes():
 
 
 async def parse_data_to_gif():
-    with open('hello-anime.gif', 'rb') as file:
-        gif_data = file.read()
-    gif_doc = {'name': 'mygif', 'data': Binary(gif_data)}
+    gif_doc = {'name': 'mygif', 'url': "https://tenor.com/ru/view/hello-anime-girl-gif-22450365"}
     gifs.insert_one(gif_doc)
 
 
