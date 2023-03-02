@@ -1,5 +1,6 @@
 import asyncio
-from db import bad_words, hellos
+import json
+from db import bad_words, hellos, anecdotes
 
 
 async def parse_data_to_bad_words():
@@ -20,8 +21,17 @@ async def parse_data_to_hello_words():
         await hellos.insert_one(document)
 
 
+async def parse_data_to_anecdotes():
+    with open('anecdotes.json', 'r') as file:
+        data = json.load(file)
+    for i in data['anecdotes']:
+        document = {'anecdote': i}
+        await anecdotes.insert_one(document)
+
+
 async def main():
-    tasks = [asyncio.ensure_future(parse_data_to_bad_words()), asyncio.ensure_future(parse_data_to_hello_words())]
+    tasks = [asyncio.ensure_future(parse_data_to_bad_words()), asyncio.ensure_future(parse_data_to_hello_words()),
+             asyncio.ensure_future(parse_data_to_anecdotes())]
     await asyncio.gather(*tasks)
 
 
