@@ -1,1 +1,1 @@
-from .db import bad_words, hellos, anecdotes
+from .db import bad_words, hellos, anecdotes, gifs

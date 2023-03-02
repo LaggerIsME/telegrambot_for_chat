@@ -1,6 +1,9 @@
+import logging
+
 from aiogram.utils import executor
 from bot_settings import dp
 from handlers import client, common, admin
+logging.basicConfig(level=logging.INFO)
 
 
 # Первый запуск бота

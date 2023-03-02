@@ -1,6 +1,7 @@
 import asyncio
 import json
-from db import bad_words, hellos, anecdotes
+from db import bad_words, hellos, anecdotes, gifs
+from bson.binary import Binary
 
 
 async def parse_data_to_bad_words():
@@ -29,9 +30,16 @@ async def parse_data_to_anecdotes():
         await anecdotes.insert_one(document)
 
 
+async def parse_data_to_gif():
+    with open('hello-anime.gif', 'rb') as file:
+        gif_data = file.read()
+    gif_doc = {'name': 'mygif', 'data': Binary(gif_data)}
+    gifs.insert_one(gif_doc)
+
+
 async def main():
     tasks = [asyncio.ensure_future(parse_data_to_bad_words()), asyncio.ensure_future(parse_data_to_hello_words()),
-             asyncio.ensure_future(parse_data_to_anecdotes())]
+             asyncio.ensure_future(parse_data_to_anecdotes()), asyncio.ensure_future(parse_data_to_gif())]
     await asyncio.gather(*tasks)
 
 
