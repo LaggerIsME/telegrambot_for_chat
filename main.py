@@ -1,6 +1,6 @@
 from aiogram.utils import executor
 from bot_settings import dp
-from handlers import client, admin, common
+from handlers import client
 
 
 # Первый запуск бота
