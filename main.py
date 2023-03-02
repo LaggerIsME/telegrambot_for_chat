@@ -1,24 +1,18 @@
-import json
+from aiogram.utils import executor
+from bot_settings import dp
+from handlers import client, admin, common
 
 
-# Получить токен бота
-# path = путь к токену
-def get_token(path: str = 'token.json'):
+# Первый запуск бота
+async def startup(_):
+    print("Бот успешно запущен")
+
+
+if __name__ == "__main__":
     try:
-        # Открыть файл с токеном
-        with open(path, 'r') as read_file:
-            data = json.load(read_file)
-        # Достать его из словаря
-        token = data['token']
-        return token
+        client.register_handlers()
+        # skip_updates = True, чтоб не засыпало сообщениями, после выключения бота
+        executor.start_polling(dp, skip_updates=True, on_startup=startup)
     except:
-        print("Неправильно указан путь к файлу с токеном, либо сам файл неправильного формата")
-        return False
-
-
-def main():
-    print(get_token())
-
-
-if __name__ == '__main__':
-    main()
+        print('У меня какие-то проблемы, простите')
+        exit()
