@@ -1,0 +1,1 @@
+from .db import bad_words, hellos

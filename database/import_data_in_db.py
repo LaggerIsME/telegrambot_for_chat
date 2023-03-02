@@ -7,16 +7,16 @@ async def parse_data_to_bad_words():
         f = file.read()
     data = f.split('\n')
     for i in data:
-        document = {'bad_word': i}
+        document = {'bad_word': i.lower()}
         await bad_words.insert_one(document)
 
 
 async def parse_data_to_hello_words():
-    with open('bad_words.txt', 'r') as file:
+    with open('hellos.txt', 'r') as file:
         f = file.read()
     data = f.split('\n')
     for i in data:
-        document = {'hello_word': i}
+        document = {'hello_word': i.lower()}
         await hellos.insert_one(document)
 
 
