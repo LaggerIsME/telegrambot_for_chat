@@ -1,6 +1,7 @@
 from aiogram import types
 from bot_settings import dp, bot
 from database import bad_words, hellos, gifs
+from aiogram.dispatcher.filters import IsReplyFilter
 
 
 async def echo_send(message: types.Message):
@@ -16,9 +17,9 @@ async def echo_send(message: types.Message):
                 await message.delete()
             elif await hellos.find_one({'hello_word': i}):
                 await message.answer('Приветик!')
-        if text == 'как дела?':
+        if text in ['как дела?', 'как дела', 'как дел']:
             await message.answer('Пойдет. У вас?')
-        elif text == 'что делаешь?':
+        elif text in ['что делаешь?', 'что делаешь', 'чо делаешь', 'шо делаешь']:
             await message.answer('Давайте уже к делу, пишите /help')
         elif text in ['сулу', 'сулужан']:
             await message.answer('Да?')
