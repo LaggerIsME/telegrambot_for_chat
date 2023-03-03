@@ -24,7 +24,7 @@ async def command_help(message: types.Message):
                              'Выдавание и отбирание тэга у участников чата\n* Фильтрация нецензурной речи\n* '
                              'Приветствие новых пользователей\n* Удаление сообщений о уходе пользователей\n* '
                              'Рассказывание анекдотов про Linux\n* Блокировка и запрет писать анонимно от лица '
-                             'каналов\n\nМой разработчик:https://t.me/pythondelay \n\nМои исходники: https://github.com/LaggerIsME/telegrambot_for_chat',
+                             'каналов',
                              reply_markup=kb_client)
     # Если не может писать
     except:
@@ -58,8 +58,9 @@ async def command_set_nickname(message: types.Message):
         user_id = user.id
         # Получение информацию о пользователе
         chat_member = await message.chat.get_member(user_id)
+        command_user = await message.chat.get_member(message.from_user.id)
         # Если пользователь админ или создатель,то
-        if not chat_member.is_chat_admin() or not chat_member.is_chat_owner():
+        if (command_user.is_chat_admin() or command_user.is_chat_owner()) and not chat_member.is_chat_owner():
             # Если есть значение никнейма
             args = message.text.split()
             if len(args) >= 2:
@@ -94,14 +95,15 @@ async def command_clear_nickname(message: types.Message):
         user_id = user.id
         # Получение информацию о пользователе
         chat_member = await message.chat.get_member(user_id)
+        command_user = await message.chat.get_member(message.from_user.id)
         # Если пользователь создатель, то
-        if not chat_member.is_chat_owner():
+        if command_user.is_chat_owner() and not chat_member.is_chat_owner():
             await message.bot.promote_chat_member(chat_id, user_id, is_anonymous=False, can_manage_chat=False,
-                                                  can_post_messages=False, can_edit_messages=False,
-                                                  can_delete_messages=False, can_manage_video_chats=False,
-                                                  can_restrict_members=False, can_promote_members=False,
-                                                  can_change_info=False, can_invite_users=False, can_pin_messages=False,
-                                                  can_manage_topics=False,)
+                                                      can_post_messages=False, can_edit_messages=False,
+                                                      can_delete_messages=False, can_manage_video_chats=False,
+                                                      can_restrict_members=False, can_promote_members=False,
+                                                      can_change_info=False, can_invite_users=False, can_pin_messages=False,
+                                                      can_manage_topics=False,)
             await message.answer(f"У пользователя {user.full_name} был забран тэг")
         else:
             await message.answer('У вас недостаточно прав')
