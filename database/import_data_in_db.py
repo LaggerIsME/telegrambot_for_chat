@@ -1,7 +1,6 @@
 import asyncio
 import json
 from db import bad_words, hellos, anecdotes, gifs
-from bson.binary import Binary
 
 
 async def parse_data_to_bad_words():

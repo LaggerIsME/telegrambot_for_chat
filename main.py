@@ -2,7 +2,7 @@ import logging
 
 from aiogram.utils import executor
 from bot_settings import dp
-from handlers import client, common, admin
+from handlers import commands, common
 logging.basicConfig(level=logging.INFO)
 
 
@@ -13,9 +13,8 @@ async def startup(_):
 
 if __name__ == "__main__":
     try:
-        client.register_handlers()
+        commands.register_handlers()
         common.register_handlers()
-        admin.register_handlers()
         # skip_updates = True, чтоб не засыпало сообщениями, после выключения бота
         executor.start_polling(dp, skip_updates=True, on_startup=startup)
     except:

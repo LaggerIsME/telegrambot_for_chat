@@ -1,5 +1,3 @@
-import asyncio
-import io
 from aiogram import types
 from bot_settings import dp, bot
 from database import bad_words, hellos, gifs
