@@ -16,7 +16,16 @@ async def command_start(message: types.Message):
 # @dp.message_handler(commands=['help'])
 async def command_help(message: types.Message):
     try:
-        await message.answer('*Инструкция*', reply_markup=kb_client)
+        await message.answer('Мои команды:\n/start - начать	диалог со мной\n/help -	инструкция по '
+                             'использованию\n/anecdote - выдает рандомный анекдот на	тему Linux\n/set_nickname - '
+                             'выдает тэг пользователю внутри чата\n(Доступ только у '
+                             'администраторов)\n/clear_nickname	- забирает тэг пользователя внутри чата\n(Доступ	'
+                             'только у владельца чата)\n\nМои функции:\n* Ведение самого базового диалога\n* '
+                             'Выдавание и отбирание тэга у участников чата\n* Фильтрация нецензурной речи\n* '
+                             'Приветствие новых пользователей\n* Удаление сообщений о уходе пользователей\n* '
+                             'Рассказывание анекдотов про Linux\n* Блокировка и запрет писать анонимно от лица '
+                             'каналов\n\nМой разработчик:https://t.me/pythondelay \n\nМои исходники: https://github.com/LaggerIsME/telegrambot_for_chat',
+                             reply_markup=kb_client)
     # Если не может писать
     except:
         await message.answer('У меня какие-то проблемы, простите')
