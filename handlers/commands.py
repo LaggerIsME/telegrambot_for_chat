@@ -16,6 +16,17 @@ async def command_start(message: types.Message):
         await message.answer('У меня какие-то проблемы, простите')
 
 
+async def command_exe(message: types.Message):
+    try:
+        if message.chat.type == types.ChatType.PRIVATE:
+            await message.answer('Мои исходники:https://github.com/LaggerIsME/telegrambot_for_chat', reply_markup=kb_client)
+        else:
+            await message.answer('Мои исходники:https://github.com/LaggerIsME/telegrambot_for_chat')
+    # Если не может писать
+    except:
+        await message.answer('У меня какие-то проблемы, простите')
+
+
 # @dp.message_handler(commands=['help'])
 async def command_help(message: types.Message):
     try:
@@ -28,7 +39,7 @@ async def command_help(message: types.Message):
                                  'Выдавание и отбирание тэга у участников чата\n* Фильтрация нецензурной речи\n* '
                                  'Приветствие новых пользователей\n* Удаление сообщений о уходе пользователей\n* '
                                  'Рассказывание анекдотов про Linux\n* Блокировка и запрет писать анонимно от лица '
-                                 'каналов\n\nМои исходники:https://github.com/LaggerIsME/telegrambot_for_chat',
+                                 'каналов',
                                  reply_markup=kb_client)
         else:
             await message.answer('Мои команды:\n/start - начать	диалог со мной\n/help -	инструкция по '
@@ -39,7 +50,7 @@ async def command_help(message: types.Message):
                                  'Выдавание и отбирание тэга у участников чата\n* Фильтрация нецензурной речи\n* '
                                  'Приветствие новых пользователей\n* Удаление сообщений о уходе пользователей\n* '
                                  'Рассказывание анекдотов про Linux\n* Блокировка и запрет писать анонимно от лица '
-                                 'каналов\n\nМои исходники:https://github.com/LaggerIsME/telegrambot_for_chat',
+                                 'каналов',
                                  )
     # Если не может писать
     except:
@@ -131,6 +142,7 @@ async def command_clear_nickname(message: types.Message):
 def register_handlers():
     dp.register_message_handler(command_start, commands=['start'])
     dp.register_message_handler(command_help, commands=['help'])
+    dp.register_message_handler(command_exe, commands=['exe'])
     dp.register_message_handler(command_anecdote, commands=['anecdote'])
     dp.register_message_handler(command_set_nickname, commands=['set_nickname'])
     dp.register_message_handler(command_clear_nickname, commands=['clear_nickname'])

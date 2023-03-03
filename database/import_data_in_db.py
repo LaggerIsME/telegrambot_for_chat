@@ -4,7 +4,7 @@ from db import bad_words, hellos, anecdotes, gifs
 
 
 async def parse_data_to_bad_words():
-    with open('bad_words.txt', 'r') as file:
+    with open('database/bad_words.txt', 'r') as file:
         f = file.read()
     data = f.split('\n')
     for i in data:
@@ -13,7 +13,7 @@ async def parse_data_to_bad_words():
 
 
 async def parse_data_to_hello_words():
-    with open('hellos.txt', 'r') as file:
+    with open('database/hellos.txt', 'r') as file:
         f = file.read()
     data = f.split('\n')
     for i in data:
@@ -22,7 +22,7 @@ async def parse_data_to_hello_words():
 
 
 async def parse_data_to_anecdotes():
-    with open('anecdotes.json', 'r') as file:
+    with open('database/anecdotes.json', 'r') as file:
         data = json.load(file)
     for i in data['anecdotes']:
         document = {'anecdote': i}
@@ -31,7 +31,7 @@ async def parse_data_to_anecdotes():
 
 async def parse_data_to_gif():
     gif_doc = {'name': 'mygif', 'url': "https://tenor.com/ru/view/hello-anime-girl-gif-22450365"}
-    gifs.insert_one(gif_doc)
+    await gifs.insert_one(gif_doc)
 
 
 async def main():

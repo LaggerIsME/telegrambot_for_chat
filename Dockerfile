@@ -4,15 +4,10 @@ FROM python:latest
 WORKDIR /app
 # Копирование туда файлов зависимости
 COPY requirements.txt .
+# Обновление инструментов
+RUN pip install --upgrade setuptools
 # Установка зависимостей
-RUN pip install -r --upgrade requirements.txt
-# Скопировать остальное
+RUN pip install -r requirements.txt
+# Скопировать все в наш образ
 COPY . .
-# Переход в директорию с модулем базы данных
-WORKDIR /app/database
-# Активация скрипта для заполнения MongoDB NoSQL
-RUN python import_data_in_db.py
-# Переход в директорию приложения
-WORKDIR /app
-# Запуск приложения
-CMD ["python", "main.py"]
+
