@@ -21,20 +21,18 @@
 * AsyncIOMotor(MongoDB-Python)
 * MongoDB
 * Docker
+* Docker Compose
 ## Зависимости
 * Python 3.10+
 ## Установка
-Примечание: на данный момент, docker-compose.yml все еще тестируется и работает нестабильно, так что советуется ставить все локально
 * Клонировать репозиторий: `git clone https://github.com/LaggerIsME/telegrambot_for_chat`
-* Скачать и установить MongoDB: https://www.mongodb.com/docs/manual/administration/install-community/
+* Скачать и установить Docker и Docker-Compose: https://docs.docker.com/engine/install/
 * Перейти в директорию проекта: `cd ~/telegrambot_for_chat`
-* Установить все зависимости: `pip install -r requirements.txt`
-* Перейти в в директорию с базой данных: `cd ~/telegrambot_for_chat/database`
-* Запустить скрипт для импорта данных из файлов: `python import_data_in_db.py`
-* Создать бота и получить токен у @BotFather
+* Создать бота в Telegram и получить токен у @BotFather
 * Также в чате с @BotFather написать: `/setprivacy` и поставить галочку на DISABLE
-* Вернуться в основную директорию проекта: `cd ~/telegrambot_for_chat`
-* Создать JSON-файл хранящий токен бота в виде: `{"token": "значение вашего токена"} `
-* Запустить бота с помощью команды: `python main.py`
+* Создать `token.json`, хранящий токен бота в виде: `{"token": "значение вашего токена"} `
+* Запустить бота с помощью команды:
+* * Linux: `docker compose up -d --build`
+* * MacOS, Windows: `docker-compose up -d --build`
 
 После всех этих действий бот будет доступен в Telegram по своему Telegram ID, приятного использования!
