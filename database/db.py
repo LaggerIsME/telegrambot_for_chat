@@ -1,4 +1,6 @@
 import motor.motor_asyncio
+from aiogram.contrib.fsm_storage.redis import RedisStorage2
+
 # Настройки БД
 username = 'sulu'
 password = '12345678'
@@ -11,3 +13,7 @@ bad_words = db.bad_words
 hellos = db.hellos
 anecdotes = db.anecdotes
 gifs = db.gifs
+# БД для редиса
+host = 'redis'
+port = 6379
+redis = RedisStorage2(db=2, host=host, port=6379)

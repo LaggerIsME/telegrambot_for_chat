@@ -1,6 +1,7 @@
 import json
 from aiogram import Bot
 from aiogram.dispatcher import Dispatcher
+from database import redis
 
 
 # Получить токен бота
@@ -22,4 +23,4 @@ token = get_token()
 # Создание бота
 bot = Bot(token=token)
 # Обрабатыватель сообщений Telegram
-dp = Dispatcher(bot)
+dp = Dispatcher(bot, storage=redis)
