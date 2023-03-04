@@ -1,15 +1,12 @@
 ![image](https://img.shields.io/badge/Python-FFD43B?style=for-the-badge&logo=python&logoColor=blue)
 ![image](https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white)
 ![image](https://img.shields.io/badge/Telegram-2CA5E0?style=for-the-badge&logo=telegram&logoColor=white)
-![image](https://img.shields.io/badge/Docker-2CA5E0?style=for-the-badge&logo=docker&logoColor=white)
 # Telegram-bot для Linux Klubа
 Данный проект является нынешним чат-ботом Linux Klub-а, который выдает тэги пользователям, рассказывает анекдоты,
 не разрешает выражаться нецензурной лексикой, а также может вести базовую беседу. Данные о возможных  плохих словах, о приветствиях и ссылки на гиф-изображения
 хранятся внутри NoSQL MongoDB базы данных. БД подключена через асинхронный драйвер AsyncIOMotor для высокой производительности.
 ## Ссылка на бота: https://t.me/SulujhonBot
-
-![image](https://assets.pinterest.com/ext/embed.html?id=42713896452182135)
-
+![image](Ayano.jpg)
 ## Функционал
 * Ведение самого базового диалога
 * Выдавание и отбирание тэга у участников чата
