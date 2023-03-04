@@ -30,8 +30,11 @@ async def parse_data_to_anecdotes():
 
 
 async def parse_data_to_gif():
-    gif_doc = {'name': 'mygif', 'url': "https://tenor.com/ru/view/hello-anime-girl-gif-22450365"}
-    await gifs.insert_one(gif_doc)
+    with open('database/gifs.json', 'r') as file:
+        data = json.load(file)
+    for i in data['gifs']:
+        gif_doc = {'url': i}
+        await gifs.insert_one(gif_doc)
 
 
 async def main():
