@@ -1,4 +1,5 @@
 ![image](https://img.shields.io/badge/Python-FFD43B?style=for-the-badge&logo=python&logoColor=blue)
+![image](https://img.shields.io/badge/scikit_learn-F7931E?style=for-the-badge&logo=scikit-learn&logoColor=white)
 ![image](https://img.shields.io/badge/MongoDB-4EA94B?style=for-the-badge&logo=mongodb&logoColor=white)
 ![image](https://img.shields.io/badge/redis-%23DD0031.svg?&style=for-the-badge&logo=redis&logoColor=white)
 ![image](https://img.shields.io/badge/Docker-2CA5E0?style=for-the-badge&logo=docker&logoColor=white)
@@ -6,7 +7,7 @@
 # Telegram-bot для Linux Klubа
 Данный проект является нынешним чат-ботом Linux Klub-а, который выдает тэги пользователям, рассказывает анекдоты,
 не разрешает выражаться нецензурной лексикой, а также может вести базовую беседу. Данные о возможных  плохих словах, о приветствиях и ссылки на гиф-изображения
-хранятся внутри NoSQL MongoDB базы данных. Данные о спаме пользователя хранятся в NoSQL Redis базе данных. Все подключено через асинхронные драйверы. Общаются по средством модели реализованной с помощью библиотеки scikit-learn 
+хранятся внутри NoSQL MongoDB базы данных. Данные о спаме пользователя хранятся в NoSQL Redis базе данных. Все подключено через асинхронные драйверы. Бот общается по средством модели реализованной с помощью библиотеки scikit-learn 
 ## Ссылка на бота: https://t.me/SulujhonBot
 ![image](other_documents/Ayano.jpg)
 ## Функционал
