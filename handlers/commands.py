@@ -1,10 +1,16 @@
 from aiogram import types
 from bot_settings import dp, bot
 from keyboards import kb_client
-from database import anecdotes
+from database import anecdotes, instructions
 
 
+async def get_instructions(_id: str):
+    instruction = await instructions.find_one({'_id': _id}, {'id': 0})
+    instruction = instruction['text']
+    return instruction
 # @dp.message_handler(commands=['start'])
+
+
 async def command_start(message: types.Message):
     try:
         if message.chat.type == types.ChatType.PRIVATE:
@@ -31,29 +37,40 @@ async def command_exe(message: types.Message):
 
 # @dp.message_handler(commands=['help'])
 async def command_help(message: types.Message):
+    help = await get_instructions('help')
     try:
         if message.chat.type == types.ChatType.PRIVATE:
-            await message.answer('Мои команды:\n/start - начать	диалог со мной\n/help -	инструкция по '
-                                 'использованию\n/anecdote - выдает рандомный анекдот на	тему Linux\n/set_nickname - '
-                                 'выдает тэг пользователю внутри чата\n(Доступ только у '
-                                 'администраторов)\n/clear_nickname	- забирает тэг пользователя внутри чата\n(Доступ	'
-                                 'только у владельца чата)\n\nМои функции:\n* Ведение самого базового диалога\n* '
-                                 'Выдавание и отбирание тэга у участников чата\n* Фильтрация нецензурной речи\n* '
-                                 'Приветствие новых пользователей\n* Удаление сообщений о уходе пользователей\n* '
-                                 'Рассказывание анекдотов про Linux\n* Блокировка и запрет писать анонимно от лица '
-                                 'каналов',
+            await message.answer(help,
                                  reply_markup=kb_client)
         else:
-            await message.answer('Мои команды:\n/start - начать	диалог со мной\n/help -	инструкция по '
-                                 'использованию\n/anecdote - выдает рандомный анекдот на	тему Linux\n/set_nickname - '
-                                 'выдает тэг пользователю внутри чата\n(Доступ только у '
-                                 'администраторов)\n/clear_nickname	- забирает тэг пользователя внутри чата\n(Доступ	'
-                                 'только у владельца чата)\n\nМои функции:\n* Ведение самого базового диалога\n* '
-                                 'Выдавание и отбирание тэга у участников чата\n* Фильтрация нецензурной речи\n* '
-                                 'Приветствие новых пользователей\n* Удаление сообщений о уходе пользователей\n* '
-                                 'Рассказывание анекдотов про Linux\n* Блокировка и запрет писать анонимно от лица '
-                                 'каналов',
-                                 )
+            await message.answer(help)
+    # Если не может писать
+    except:
+        await message.answer('У меня какие-то проблемы, простите')
+
+
+async def command_faq(message: types.Message):
+    faq = await get_instructions('faq')
+    try:
+        await message.answer(faq)
+    # Если не может писать
+    except:
+        await message.answer('У меня какие-то проблемы, простите')
+
+
+async def command_about(message: types.Message):
+    about = await get_instructions('about')
+    try:
+        await message.answer(about)
+    # Если не может писать
+    except:
+        await message.answer('У меня какие-то проблемы, простите')
+
+
+async def command_rules(message: types.Message):
+    rules = await get_instructions('rules')
+    try:
+        await message.answer(rules)
     # Если не может писать
     except:
         await message.answer('У меня какие-то проблемы, простите')
@@ -152,6 +169,9 @@ async def command_clear_nickname(message: types.Message):
 def register_handlers():
     dp.register_message_handler(command_start, commands=['start'])
     dp.register_message_handler(command_help, commands=['help'])
+    dp.register_message_handler(command_faq, commands=['faq'])
+    dp.register_message_handler(command_about, commands=['about'])
+    dp.register_message_handler(command_rules, commands=['rules'])
     dp.register_message_handler(command_exe, commands=['exe'])
     dp.register_message_handler(command_anecdote, commands=['anecdote'])
     dp.register_message_handler(command_set_nickname, commands=['set_nickname'])

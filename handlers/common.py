@@ -86,7 +86,7 @@ async def welcome(message: types.Message):
     gif_data = gif_doc['url']
     for member in message.new_chat_members:
         await bot.send_animation(chat_id=message.chat.id, animation=gif_data,
-                                 caption=f'Добро пожаловать, {member.first_name}!')
+                                 caption=f'Добро пожаловать, {member.first_name}!\nПосмотреть правила чата: /rules')
 
 
 # Удалить сообщение о том, что пользователь вышел

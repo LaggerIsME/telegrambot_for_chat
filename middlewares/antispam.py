@@ -136,7 +136,7 @@ class ThrottlingMiddleware(BaseMiddleware):
 
         # Prevent flooding
 
-        if throttled.exceeded_count <= 2:
+        if throttled.exceeded_count <= 5:
 
             await message.reply('Не пишите, так часто пожалуйста! ')
 
@@ -154,5 +154,6 @@ class ThrottlingMiddleware(BaseMiddleware):
         # If current message is not last with current key - do not send message
 
         if thr.exceeded_count == throttled.exceeded_count:
+            tasks = [message.delete(),  message.reply('Может уже хватит?')]
+            await asyncio.gather(*tasks)
 
-            await message.reply('Заблокировано.')

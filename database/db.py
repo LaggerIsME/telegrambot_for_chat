@@ -13,6 +13,7 @@ bad_words = db.bad_words
 hellos = db.hellos
 anecdotes = db.anecdotes
 gifs = db.gifs
+instructions = db.instructions
 # БД для редиса
 host = 'redis'
 port = 6379

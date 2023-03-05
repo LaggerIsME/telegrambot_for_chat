@@ -1,6 +1,6 @@
 import asyncio
 import json
-from db import bad_words, hellos, anecdotes, gifs
+from db import bad_words, hellos, anecdotes, gifs, instructions
 
 
 async def parse_data_to_bad_words():
@@ -29,7 +29,7 @@ async def parse_data_to_anecdotes():
         await anecdotes.insert_one(document)
 
 
-async def parse_data_to_gif():
+async def parse_data_to_gifs():
     with open('database/gifs.json', 'r') as file:
         data = json.load(file)
     for i in data['gifs']:
@@ -37,9 +37,21 @@ async def parse_data_to_gif():
         await gifs.insert_one(gif_doc)
 
 
+async def parse_data_to_intsructions():
+    with open('database/instructions.json', 'r') as file:
+        data = json.load(file)
+    for i in data:
+        try:
+            doc = {'_id': i, 'text': data[i]}
+            await instructions.insert_one(doc)
+        except:
+            pass
+
+
 async def main():
     tasks = [asyncio.ensure_future(parse_data_to_bad_words()), asyncio.ensure_future(parse_data_to_hello_words()),
-             asyncio.ensure_future(parse_data_to_anecdotes()), asyncio.ensure_future(parse_data_to_gif())]
+             asyncio.ensure_future(parse_data_to_anecdotes()), asyncio.ensure_future(parse_data_to_gifs()),
+             asyncio.ensure_future(parse_data_to_intsructions())]
     await asyncio.gather(*tasks)
 
 
