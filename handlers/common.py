@@ -1,7 +1,7 @@
 from aiogram import types
+from main import generator
 from bot_settings import dp, bot
-from database import bad_words, hellos, gifs
-from aiogram.dispatcher.filters import IsReplyFilter
+from database import bad_words, gifs
 
 
 # Проверка есть ли слово в предложении
@@ -21,27 +21,10 @@ async def echo_simple_words_with_filter(message: types.Message, mode: bool):
                 await message.answer('Пожалуйста, не материтесь')
                 # Удалить сообщение с матом
                 await message.delete()
-    # Всегда выполнять
-    for i in text_split:
-        if not i:
-            await message.answer('Сообщение должно содержать хотя бы одно слово.')
-        if await hellos.find_one({'hello_word': i}):
-            await message.answer('Приветик!')
-    # Базовые функции, пока реализованы через локальные переменные
-    if await findWord(text, "как дела"):
-        await message.answer('Пойдет. У вас?')
-    elif await findWord(text, "что делаешь"):
-        await message.answer('Давайте уже к делу, пишите /help')
-    elif await findWord(text, "чо делаешь"):
-        await message.answer('Давайте уже к делу, пишите /help')
-    elif await findWord(text, "го встречаться"):
-        await message.answer('Извините, но у меня есть мой создатель')
-    elif await findWord(text, "напиши код"):
-        await message.answer('Я тебе не СhatGPT, его и проси писать')
-
-
-
-
+    # Сгенерировать ответ
+    response = await generator.get_generative_replica(message.text)
+    # Отправить его
+    await message.answer(response)
 
 
 async def echo_send(message: types.Message):

@@ -1,7 +1,9 @@
 import asyncio
 import logging
 from aiogram.utils import executor
-from bot_settings import dp
+from ai_for_chatting import main
+from ai_for_chatting.ai_config import ReplicaGenerator
+from bot_settings import dp, generator
 from database import client
 from handlers import commands, common
 from middlewares import ThrottlingMiddleware
@@ -10,6 +12,7 @@ logging.basicConfig(level=logging.INFO)
 
 # Первый запуск бота
 async def startup(_):
+    await main(generator)
     print("Бот успешно запущен")
 
 
