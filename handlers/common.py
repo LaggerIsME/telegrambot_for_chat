@@ -34,6 +34,14 @@ async def echo_simple_words_with_filter(message: types.Message, mode: bool):
         await message.answer('Давайте уже к делу, пишите /help')
     elif await findWord(text, "чо делаешь"):
         await message.answer('Давайте уже к делу, пишите /help')
+    elif await findWord(text, "го встречаться"):
+        await message.answer('Извините, но у меня есть мой создатель')
+    elif await findWord(text, "напиши код"):
+        await message.answer('Я тебе не СhatGPT, его и проси писать')
+
+
+
+
 
 
 async def echo_send(message: types.Message):
