@@ -27,7 +27,7 @@ if __name__ == "__main__":
     try:
         commands.register_handlers()
         common.register_handlers()
-        dp.middleware.setup(ThrottlingMiddleware(limit=0.5))
+        dp.middleware.setup(ThrottlingMiddleware(limit=1))
         # skip_updates = True, чтоб не засыпало сообщениями, после выключения бота
         executor.start_polling(dp, skip_updates=True, on_startup=startup, on_shutdown=shutdown)
     except:

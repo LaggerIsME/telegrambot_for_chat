@@ -17,14 +17,17 @@ async def echo_simple_words_with_filter(message: types.Message, mode: bool):
         for i in text_split:
             if not i:
                 await message.answer('Сообщение должно содержать хотя бы одно слово.')
+                break
             elif await bad_words.find_one({'bad_word': i}):
                 await message.answer('Пожалуйста, не материтесь')
                 # Удалить сообщение с матом
                 await message.delete()
-    # Сгенерировать ответ
-    response = await generator.get_generative_replica(message.text)
-    # Отправить его
-    await message.answer(response)
+                break
+    if not await findWord(message.text, 'сулу сулу'):
+        # Сгенерировать ответ
+        response = await generator.get_generative_replica(message.text)
+        # Отправить его
+        await message.answer(response)
 
 
 async def echo_send(message: types.Message):
