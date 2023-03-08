@@ -4,7 +4,9 @@ services:
   telegram-bot:
     build: .
     # sh -c запускает команду через shell alias на python, а не через путь на интерпретатор
-    command: sh -c "python /app/database/import_data_in_db.py && python main.py"
+    env_file:
+      - .env
+    command: sh -c "python main.py"
     container_name: telegram-bot
     depends_on:
       - mongo
@@ -12,9 +14,9 @@ services:
   mongo:
     image: mongo:latest
     container_name: mongo
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: sulu
-      MONGO_INITDB_ROOT_PASSWORD: 12345678
+    volumes:
+      - ./database/mongorestore.sh:/docker-entrypoint-initdb.d/mongorestore.sh
+      - ./database/backup:/database/backup
     ports:
       - "27017:27017"
     restart: on-failure
