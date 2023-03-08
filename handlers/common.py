@@ -51,10 +51,16 @@ async def echo_send(message: types.Message):
             bot_info = await bot.get_me()
             # Тэг бота
             bot_username = f"@{bot_info.username.lower()}"
-            for i in message.text.lower().split():
-                # Если в сообщении указали имя бота
-                if i in ['сулу', 'сулужан', 'сулужанчик', bot_username]:
+            words = []
+            # Разделить предложение на части по запятой
+            for part in message.text.lower().split(","):
+                # Разделить слова по пробелам
+                words.extend(part.split())
+            # Проверка слов
+            for word in words:
+                if word in ['сулу', 'сулужан', 'сулужанчик', bot_username]:
                     await echo_simple_words_with_filter(message, mode=False)
+                    break
 
 
 # Нужен чел с премиум, пока проверить нереально
