@@ -138,7 +138,7 @@ class ThrottlingMiddleware(BaseMiddleware):
 
         if throttled.exceeded_count <= 2:
 
-            await message.reply('Не пишите, так часто пожалуйста! ')
+            await message.reply('Не пишите так часто, пожалуйста! ')
 
 
         # Sleep.
