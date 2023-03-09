@@ -58,6 +58,15 @@ async def command_faq(message: types.Message):
         await message.answer('У меня какие-то проблемы, простите')
 
 
+async def command_donate(message: types.Message):
+    donate = await get_instructions('donate')
+    try:
+        await message.answer(donate)
+    # Если не может писать
+    except:
+        await message.answer('У меня какие-то проблемы, простите')
+
+
 async def command_about(message: types.Message):
     about = await get_instructions('about')
     try:
@@ -170,6 +179,7 @@ def register_handlers():
     dp.register_message_handler(command_start, commands=['start'])
     dp.register_message_handler(command_help, commands=['help'])
     dp.register_message_handler(command_faq, commands=['faq'])
+    dp.register_message_handler(command_donate, commands=['donate'])
     dp.register_message_handler(command_about, commands=['about'])
     dp.register_message_handler(command_rules, commands=['rules'])
     dp.register_message_handler(command_exe, commands=['exe'])
