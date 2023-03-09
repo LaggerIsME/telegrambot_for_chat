@@ -38,7 +38,7 @@
 * Перейти в директорию проекта: `cd ~/telegrambot_for_chat`
 * Создать бота в Telegram и получить токен у @BotFather
 * Также в чате с @BotFather написать: `/setprivacy` и поставить галочку на DISABLE
-* Создать `token.json`, хранящий токен бота в виде: `{"token": "значение вашего токена"} `
+* Изменить значение переменной `BOT_TOKEN` в файле `.env`, на полученной токен от @BotFather
 * Запустить бота с помощью команды:
 * * Linux: `docker compose up -d --build`
 * * MacOS, Windows: `docker-compose up -d --build`
