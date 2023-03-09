@@ -88,6 +88,7 @@ async def delete_goodbye_message(message: types.Message):
     except:
         pass
 
+
 # Регистрация хэндлеров
 def register_handlers():
     dp.register_message_handler(echo_send)
