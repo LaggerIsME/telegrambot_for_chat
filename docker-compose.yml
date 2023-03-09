@@ -4,26 +4,42 @@ services:
   telegram-bot:
     build: .
     # sh -c запускает команду через shell alias на python, а не через путь на интерпретатор
-    command: sh -c "python /app/database/import_data_in_db.py && python main.py"
+    env_file:
+      - .env
+    command: sh -c "python main.py"
     container_name: telegram-bot
+    ports:
+      - "8000:8000"
     depends_on:
       - mongo
+      - ngrok
+      - redis
 
   mongo:
     image: mongo:latest
     container_name: mongo
-    environment:
-      MONGO_INITDB_ROOT_USERNAME: sulu
-      MONGO_INITDB_ROOT_PASSWORD: 12345678
+    volumes:
+      - ./database/mongorestore.sh:/docker-entrypoint-initdb.d/mongorestore.sh
+      - ./database/backup:/database/backup
     ports:
       - "27017:27017"
     restart: on-failure
 
   redis:
     image: redis:latest
+    command: redis-server --appendonly yes --replica-read-only no
     container_name: redis
     ports:
       - "6379:6379"
     restart: on-failure
 
+  ngrok:
+    image: wernight/ngrok
+    environment:
+      - NGROK_AUTH=${NGROK_AUTH_TOKEN}
+      - NGROK_PROTOCOL=https
+      - NGROK_REGION=eu
+    container_name: ngrok
+    ports:
+      - "4040:4040"
 
