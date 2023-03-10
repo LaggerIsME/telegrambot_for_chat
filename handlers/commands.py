@@ -120,7 +120,12 @@ async def command_set_nickname(message: types.Message):
             if (command_user.is_chat_admin() or command_user.is_chat_owner()) \
                     and not chat_member.is_chat_owner():
                 # Если есть значение никнейма
+                bot_info = await bot.get_me()
+                bot_username = f"@{bot_info.username}"
+                # Вырезать /set_nickname
                 args = message.text.replace("/set_nickname", "").strip()
+                # Вырезать имя бота из ника
+                args = args.replace(bot_username, "").strip()
                 if len(args) >= 1:
                     if user_id == command_user_id or command_user.can_promote_members:
                         # Повышение прав до админа, который может приглашать пользователей
