@@ -30,7 +30,7 @@ services:
     command: redis-server --appendonly yes --replica-read-only no
     container_name: redis
     ports:
-      - "6379:6379"
+      - "0.0.0.0:6379:6379"
     restart: on-failure
 
   ngrok:
