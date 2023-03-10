@@ -6,6 +6,7 @@ from ai_for_chatting import main
 from bot_settings import dp, generator, public_url, token, bot
 from database import client
 from handlers import commands, common
+from keyboards.buttons import set_commands
 from middlewares import ThrottlingMiddleware
 
 # Роут, который будет принимать данные
@@ -29,6 +30,7 @@ async def on_startup(dp):
             url=WEBHOOK_URL
         )
     # Искусственный интеллект
+    await set_commands()
     await main(generator)
 
 
