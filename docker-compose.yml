@@ -33,13 +33,3 @@ services:
       - "0.0.0.0:6379:6379"
     restart: on-failure
 
-  ngrok:
-    image: wernight/ngrok
-    environment:
-      - NGROK_AUTH=${NGROK_AUTH_TOKEN}
-      - NGROK_PROTOCOL=https
-      - NGROK_REGION=eu
-    container_name: ngrok
-    ports:
-      - "4040:4040"
-
