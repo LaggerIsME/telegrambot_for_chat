@@ -1,5 +1,9 @@
 version: "3.9"
 
+networks:
+  web:
+    external: true
+
 services:
   telegram-bot:
     build: .
@@ -10,10 +14,13 @@ services:
     container_name: telegram-bot
     ports:
       - "8000:8000"
+    expose:
+      - "8000"
     depends_on:
       - mongo
-      - ngrok
       - redis
+    networks:
+      - web
 
   mongo:
     image: mongo:latest
@@ -23,6 +30,8 @@ services:
       - ./database/backup:/database/backup
     ports:
       - "27017:27017"
+    networks:
+      - web
     restart: on-failure
 
   redis:
@@ -31,5 +40,7 @@ services:
     container_name: redis
     ports:
       - "0.0.0.0:6379:6379"
+    networks:
+      - web
     restart: on-failure
 

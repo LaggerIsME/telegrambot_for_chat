@@ -12,5 +12,3 @@ bot = Bot(token=BOT_TOKEN)
 dp = Dispatcher(bot, storage=redis)
 # Генератор ответов
 generator = ReplicaGenerator()
-# Публичный url сервера
-public_url = "https://example.com"

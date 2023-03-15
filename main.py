@@ -3,16 +3,17 @@ import logging
 import os
 from aiogram.utils.executor import start_webhook
 from ai_for_chatting import main
-from bot_settings import dp, generator, public_url, BOT_TOKEN, bot
+from bot_settings import dp, generator, bot
 from database import client
 from handlers import commands, common
 from keyboards.buttons import set_commands
 from middlewares import ThrottlingMiddleware
 
 # Роут, который будет принимать данные
-WEBHOOK_PATH = f"/bot/asdasdsadas"
+WEBHOOK_PATH = os.environ.get('WEBHOOK_PATH')
+PUBLIC_URL = os.environ.get('PUBLIC_URL')
 # Путь до данного роута в публичной сети
-WEBHOOK_URL = public_url + WEBHOOK_PATH
+WEBHOOK_URL = PUBLIC_URL + WEBHOOK_PATH
 # Расположение самого хоста в docker
 WEBAPP_HOST = os.getenv('WEBAPP_HOST')
 # Расположение самого порта в docker

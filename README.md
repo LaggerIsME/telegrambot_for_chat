@@ -24,7 +24,7 @@
 ## Инструменты и библиотеки
 * Aiogram
 * Asyncio
-* Ngrok
+* Caddy
 * Scikit-learn
 * AsyncIOMotor(MongoDB-Python)
 * MongoDB
@@ -40,8 +40,8 @@
 * Перейти в директорию проекта: `cd ~/telegrambot_for_chat`
 * Создать бота в Telegram и получить токен у @BotFather
 * Также в чате с @BotFather написать: `/setprivacy` и поставить галочку на DISABLE
-* Изменить значение переменной `BOT_TOKEN` в файле `.env`, на полученной токен от @BotFather
-* Получить токен авторизации на https://ngrok.com/, и вставить его в `NGROK_AUTH_TOKEN` в файле `.env`
+* Изменить значение переменных в файле `.env`
+* Установить реверс-прокси Caddy с этого репозитория по инструкции: https://github.com/LaggerIsME/caddy_for_telegram_bot
 * Запустить бота с помощью команды:
 * * Linux: `docker compose up -d --build`
 * * MacOS, Windows: `docker-compose up -d --build`
