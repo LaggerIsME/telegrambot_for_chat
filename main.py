@@ -46,7 +46,7 @@ if __name__ == "__main__":
     try:
         commands.register_handlers()
         common.register_handlers()
-        dp.middleware.setup(ThrottlingMiddleware(limit=0.5))
+        dp.middleware.setup(ThrottlingMiddleware(limit=1))
         start_webhook(dispatcher=dp,
         webhook_path=WEBHOOK_PATH,
         on_startup=on_startup,
