@@ -37,13 +37,9 @@ async def command_exe(message: types.Message):
 
 # @dp.message_handler(commands=['help'])
 async def command_help(message: types.Message):
-    help = await get_instructions('help')
     try:
-        if message.chat.type == types.ChatType.PRIVATE:
-            await message.answer(help,
-                                 reply_markup=kb_client)
-        else:
-            await message.answer(help)
+        photo = open('other_documents/help.jpg', 'rb')
+        await bot.send_photo(chat_id=message.chat.id, photo=photo)
     # Если не может писать
     except:
         await message.answer('У меня какие-то проблемы, простите')

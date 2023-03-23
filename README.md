@@ -11,6 +11,8 @@
 Само общение бота с TelegramAPI реализовано с помощью Webhook-ов и Ngrok-а
 ## Ссылка на бота: https://t.me/SulujhonBot
 ![image](other_documents/Ayano.jpg)
+## Инструкция по использованию:
+![image](other_documents/help.jpg)
 ## Функционал
 * Общение с пользователями
 * Выдавание и отбирание тэга у участников чата
