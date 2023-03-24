@@ -26,5 +26,6 @@ async def set_commands():
                                                               "администраторов)"),
         types.BotCommand(command="/clear_nickname", description="Отбирание тэга у пользователя внутри чата\n(Доступ "
                                                                 "только у владельца чата)"),
+        types.BotCommand(command="/top100", description="Топ 100 человек, поддержавших данный проект"),
     ]
     await bot.set_my_commands(bot_commands)

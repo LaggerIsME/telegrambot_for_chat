@@ -1,7 +1,7 @@
 from aiogram import types
 from bot_settings import dp, bot
 from keyboards import kb_client
-from database import anecdotes, instructions
+from database import anecdotes, instructions, tops
 
 
 async def get_instructions(_id: str):
@@ -41,6 +41,21 @@ async def command_help(message: types.Message):
         photo = open('other_documents/help.jpg', 'rb')
         await bot.send_photo(chat_id=message.chat.id, photo=photo)
     # Если не может писать
+    except:
+        await message.answer('У меня какие-то проблемы, простите')
+
+
+async def command_top100(message: types.Message):
+    # 100 наивысших донатеров
+    cursor = tops.find().sort([('money', -1)]).limit(100)
+    # Данные в виде словаря
+    data = "Топ 100 донатеров:\n"
+    n = 1  # Позиция пользователя
+    for doc in await cursor.to_list(100):
+        data = data + f'{n}. {doc["money"]} - {doc["name"]}({doc["_id"]})\n'
+        n = n + 1
+    try:
+        await message.answer(data)
     except:
         await message.answer('У меня какие-то проблемы, простите')
 
@@ -179,6 +194,7 @@ async def command_clear_nickname(message: types.Message):
 def register_handlers():
     dp.register_message_handler(command_start, commands=['start'])
     dp.register_message_handler(command_help, commands=['help'])
+    dp.register_message_handler(command_top100, commands=['top100'])
     dp.register_message_handler(command_faq, commands=['faq'])
     dp.register_message_handler(command_donate, commands=['donate'])
     dp.register_message_handler(command_about, commands=['about'])

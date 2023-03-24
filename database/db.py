@@ -12,6 +12,7 @@ hellos = db.hellos
 anecdotes = db.anecdotes
 gifs = db.gifs
 instructions = db.instructions
+tops = db.tops
 
 # Redis
 host = 'redis'
