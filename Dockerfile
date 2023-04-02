@@ -1,5 +1,5 @@
 # Установка Python в Docker
-FROM python:latest
+FROM python:3.11.2
 # Переход в рабочую директорию
 WORKDIR /app
 # Копирование туда файлов зависимости
