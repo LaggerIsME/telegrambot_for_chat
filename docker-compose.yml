@@ -36,7 +36,7 @@ services:
 
   redis:
     image: redis:7.0.9
-    command: redis-server --appendonly yes --replica-read-only no
+    command: redis-server
     container_name: redis
     ports:
       - "0.0.0.0:6379:6379"
