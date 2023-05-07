@@ -18,7 +18,7 @@ async def echo_simple_words_with_filter(message: types.Message, mode: bool):
             if not i:
                 await message.answer('Сообщение должно содержать хотя бы одно слово.')
                 break
-            elif await bad_words.find_one({'bad_word': i}):
+            elif bad_words.find_one({'bad_word': i}):
                 await message.answer('Пожалуйста, не материтесь')
                 # Удалить сообщение с матом
                 await message.delete()
@@ -74,7 +74,7 @@ async def delete_channel_messages(message: types.Message):
 
 # Приветствие для нового пользователя
 async def welcome(message: types.Message):
-    gif_doc = await gifs.aggregate([{'$sample': {'size': 1}}]).next()
+    gif_doc = gifs.aggregate([{'$sample': {'size': 1}}]).next()
     gif_data = gif_doc['url']
     for member in message.new_chat_members:
         await bot.send_animation(chat_id=message.chat.id, animation=gif_data,

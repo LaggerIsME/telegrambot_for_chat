@@ -4,8 +4,8 @@ from keyboards import kb_client
 from database import anecdotes, instructions, tops
 
 
-async def get_instructions(_id: str):
-    instruction = await instructions.find_one({'_id': _id}, {'id': 0})
+def get_instructions(_id: str):
+    instruction = instructions.find_one({'_id': _id}, {'id': 0})
     instruction = instruction['text']
     return instruction
 # @dp.message_handler(commands=['start'])
@@ -51,7 +51,7 @@ async def command_top100(message: types.Message):
     # Данные в виде словаря
     data = "Топ 100 донатеров:\n"
     n = 1  # Позиция пользователя
-    for doc in await cursor.to_list(100):
+    for doc in cursor:
         data = data + f'{n}. {doc["money"]} - {doc["name"]}({doc["_id"]})\n'
         n = n + 1
     try:
@@ -61,7 +61,7 @@ async def command_top100(message: types.Message):
 
 
 async def command_faq(message: types.Message):
-    faq = await get_instructions('faq')
+    faq = get_instructions('faq')
     try:
         await message.answer(faq)
     # Если не может писать
@@ -70,7 +70,7 @@ async def command_faq(message: types.Message):
 
 
 async def command_donate(message: types.Message):
-    donate = await get_instructions('donate')
+    donate = get_instructions('donate')
     try:
         await message.answer(donate)
     # Если не может писать
@@ -79,7 +79,7 @@ async def command_donate(message: types.Message):
 
 
 async def command_about(message: types.Message):
-    about = await get_instructions('about')
+    about = get_instructions('about')
     try:
         await message.answer(about)
     # Если не может писать
@@ -88,7 +88,7 @@ async def command_about(message: types.Message):
 
 
 async def command_rules(message: types.Message):
-    rules = await get_instructions('rules')
+    rules = get_instructions('rules')
     try:
         await message.answer(rules)
     # Если не может писать
@@ -99,7 +99,7 @@ async def command_rules(message: types.Message):
 async def command_anecdote(message: types.Message):
     try:
         # Вытащить случайной анекдот
-        anecdote = await anecdotes.aggregate([{'$sample': {'size': 1}}]).next()
+        anecdote = anecdotes.aggregate([{'$sample': {'size': 1}}]).next()
         await message.answer("Анекдот про Линукс:\n\n" + anecdote['anecdote'])
         # Если не может писать
     except:

@@ -1,10 +1,10 @@
-import motor.motor_asyncio
+from pymongo import MongoClient
 from aiogram.contrib.fsm_storage.redis import RedisStorage2
 
 # MongoDB
 MONGO_URI = f'mongodb://mongo:27017'
 # Подключение к БД
-client = motor.motor_asyncio.AsyncIOMotorClient(MONGO_URI)
+client = MongoClient(MONGO_URI)
 # Создание БД и коллекций
 db = client.filter
 bad_words = db.bad_words
