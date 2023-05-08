@@ -12,8 +12,6 @@ services:
       - .env
     command: sh -c "python main.py"
     container_name: telegram-bot
-    ports:
-      - "8000:8000"
     expose:
       - "8000"
     depends_on:
@@ -28,8 +26,8 @@ services:
     volumes:
       - ./database/mongorestore.sh:/docker-entrypoint-initdb.d/mongorestore.sh
       - ./database/backup:/database/backup
-    ports:
-      - "27017:27017"
+    expose:
+      - "27017"
     networks:
       - web
     restart: on-failure
@@ -38,8 +36,8 @@ services:
     image: redis:7.0.9
     command: redis-server
     container_name: redis
-    ports:
-      - "0.0.0.0:6379:6379"
+    expose:
+      - "6379"
     networks:
       - web
     restart: on-failure
