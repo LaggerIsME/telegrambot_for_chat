@@ -139,11 +139,14 @@ async def command_set_nickname(message: types.Message):
                 args = args.replace(bot_username, "").strip()
                 if len(args) >= 1:
                     if user_id == command_user_id or command_user.can_promote_members:
-                        # Повышение прав до админа, который может приглашать пользователей
-                        await message.bot.promote_chat_member(chat_id, user_id, can_invite_users=True)
-                        # Смена тэга пользователя
-                        await message.bot.set_chat_administrator_custom_title(chat_id, user_id, args)
-                        await message.answer(f"Пользователю {user.full_name} был установлен тэг {args}")
+                        try:
+                            # Повышение прав до админа, который может приглашать пользователей
+                            await message.bot.promote_chat_member(chat_id, user_id, can_invite_users=True)
+                            # Смена тэга пользователя
+                            await message.bot.set_chat_administrator_custom_title(chat_id, user_id, args)
+                            await message.answer(f"Пользователю {user.full_name} был установлен тэг {args}")
+                        except:
+                            await message.answer("Я тебе ник не ставила, инвалид")
                     else:
                         await message.answer('У вас недостаточно прав')
                 else:
